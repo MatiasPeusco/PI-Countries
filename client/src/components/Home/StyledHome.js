@@ -31,8 +31,16 @@ export const Section = styled.section`
 `;
 
 export const Searcher = styled.form`
+  position: relative;
   display: flex;
   gap: 1rem;
+`;
+
+export const DeleteSearch = styled.span`
+  position: absolute;
+  left: 400px;
+  top: 10px;
+  cursor: pointer;
 `;
 
 export const SearchInput = styled.input`

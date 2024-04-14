@@ -7,12 +7,10 @@ import Pagination from "../Pagination/Pagination";
 import CountriesList from "../CountriesList/CountriesList";
 
 const Home = () => {
-
     const dispatch = useDispatch();
     const countries = useSelector((state) => state.countries);
     const [currentPage, setCurrentPage] = useState(1);
     const countriesPerPage = 10;
-
 
     useEffect(() => {
         dispatch(getCountries());
@@ -30,10 +28,14 @@ const Home = () => {
 
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    const resetPagination = () => {
+        setCurrentPage(1);
+    };
+
     return (
         <>
             <Navbar />
-            <SearchComponent />
+            <SearchComponent resetPagination={resetPagination} />
             <CountriesList countries={currentCountries} />
             <Pagination
                 currentPage={currentPage}
@@ -43,4 +45,5 @@ const Home = () => {
         </>
     );
 };
+
 export default Home;
