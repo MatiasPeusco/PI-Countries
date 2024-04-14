@@ -12,6 +12,7 @@ export const DropdownMenu = styled.div`
   padding: 8px;
   min-width: 150px;
   z-index: 1;
+  right: 0px;
 `;
 
 export const DropdownItem = styled.div`
