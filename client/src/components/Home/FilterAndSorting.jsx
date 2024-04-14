@@ -1,18 +1,26 @@
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { sortCountriesAZ } from "../../utils";
 import { ButtonsContainer, Button } from "./StyledHome";
 import { Wrapper, DropdownMenu, DropdownItem } from "./StyledFilterAndSorting";
 import { CONTINENTS } from "../../constants";
 
 const FilterAndSorting = () => {
+
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
     const [showSortDropdown, setShowSortDropdown] = useState(false);
+    const dispatch = useDispatch();
+    const countries = useSelector((state) => state.countries);
 
     const toggleFilterDropdown = () => {
         setShowFilterDropdown(!showFilterDropdown);
     };
-
     const toggleSortDropdown = () => {
         setShowSortDropdown(!showSortDropdown);
+    };
+
+    const handleSortAZ = () => {
+        sortCountriesAZ(dispatch, countries);
     };
 
     return (
@@ -47,13 +55,9 @@ const FilterAndSorting = () => {
                 </Button>
                 {showSortDropdown && (
                     <DropdownMenu>
+                        <DropdownItem onClick={handleSortAZ}>A - Z</DropdownItem>
                         <DropdownItem
                             onClick={() => console.log("Ordenar alfabéticamente ascendente")}
-                        >
-                            A - Z
-                        </DropdownItem>
-                        <DropdownItem
-                            onClick={() => console.log("Ordenar alfabéticamente descendente")}
                         >
                             Z - A
                         </DropdownItem>
