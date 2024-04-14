@@ -16,6 +16,7 @@ const FilterAndSorting = () => {
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
     const [showSortDropdown, setShowSortDropdown] = useState(false);
     const [appliedFilter, setAppliedFilter] = useState(null);
+    const [appliedSorting, setAppliedSorting] = useState(null);
     const dispatch = useDispatch();
     const allCountries = useSelector((state) => state.allCountries);
     const countries = useSelector((state) => state.countries);
@@ -33,6 +34,11 @@ const FilterAndSorting = () => {
         setAppliedFilter(null);
     };
 
+    const clearAppliedSorting = () => {
+        dispatch(searchCountries(allCountries));
+        setAppliedSorting(null);
+    };
+
     const handleContinentFilter = (continent) => {
         filterCountriesByContinent(dispatch, allCountries, continent);
         setShowFilterDropdown(false);
@@ -42,31 +48,34 @@ const FilterAndSorting = () => {
     const handleSortAZ = () => {
         sortCountriesAZ(dispatch, countries);
         setShowSortDropdown(false);
-        setAppliedFilter("A - Z");
+        setAppliedSorting("A - Z");
     };
 
     const handleSortZA = () => {
         sortCountriesZA(dispatch, countries);
         setShowSortDropdown(false);
-        setAppliedFilter("Z - A");
+        setAppliedSorting("Z - A");
     };
 
     const handleSortPopulationAsc = () => {
         sortCountriesByPopulationAsc(dispatch, countries);
         setShowSortDropdown(false);
-        setAppliedFilter("Población Asc.");
+        setAppliedSorting("Población Asc.");
     };
 
     const handleSortPopulationDesc = () => {
         sortCountriesByPopulationDesc(dispatch, countries);
         setShowSortDropdown(false);
-        setAppliedFilter("Población Desc.");
+        setAppliedSorting("Población Desc.");
     };
 
     return (
         <ButtonsContainer>
             {appliedFilter && (
                 <Chip onClick={clearAppliedFilter}>{appliedFilter} &#x2715;</Chip>
+            )}
+            {appliedSorting && (
+                <Chip onClick={clearAppliedSorting}>{appliedSorting} &#x2715;</Chip>
             )}
             <Wrapper>
                 <Button type="button" onClick={() => toggleFilterDropdown()}>
