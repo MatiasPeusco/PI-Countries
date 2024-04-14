@@ -6,6 +6,7 @@ export const Section = styled.section`
   height: 100%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 40px auto;
   padding: 0 20px;
   box-sizing: border-box;
