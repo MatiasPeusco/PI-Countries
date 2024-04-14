@@ -10,11 +10,10 @@ import {
     SearchInput,
     DeleteSearch,
     SearchButton,
-    ButtonsContainer,
-    Button,
 } from "./StyledHome";
 
 import { useDispatch, useSelector } from "react-redux";
+import FilterAndSorting from "./FilterAndSorting";
 
 const SearchComponent = ({ resetPagination }) => {
     const dispatch = useDispatch();
@@ -25,6 +24,7 @@ const SearchComponent = ({ resetPagination }) => {
         dispatch(searchCountries(searchTerm));
         setSearchTerm("");
     };
+
     const handleChange = (e) => {
         setSearchTerm(e.target.value);
     };
@@ -57,10 +57,7 @@ const SearchComponent = ({ resetPagination }) => {
                         </SearchButton>
                     </Searcher>
                 </SearcherContainer>
-                <ButtonsContainer>
-                    <Button type="button">Filtrar</Button>
-                    <Button type="button">Ordenar</Button>
-                </ButtonsContainer>
+                <FilterAndSorting />
             </Wrapper>
         </Section>
     );
