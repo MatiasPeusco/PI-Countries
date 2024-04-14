@@ -1,10 +1,8 @@
 import styled from "styled-components";
-
 export const Container = styled.div`
   height: 100vh;
   width: 100%;
 `;
-
 export const BackgroundImage = styled.div`
   width: 100%;
   height: 100%;
@@ -14,7 +12,6 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
 `;
-
 export const TextContainer = styled.div`
   width: 500px;
   height: 300px;
@@ -32,7 +29,6 @@ export const TextContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
 export const Title = styled.h1`
   color: #ff0; /* henry-yellow */
   font-size: 25px;
@@ -40,14 +36,13 @@ export const Title = styled.h1`
   margin-bottom: 20px;
   text-align: center;
 `;
-
 export const Paragraph = styled.p`
   color: #fff;
   font-size: 15px;
 `;
 
 export const Button = styled.button`
-  background: #6e47db;
+  background: #6e47db; /* henry-violet */
   border: 1px solid #ff0;
   border-style: double;
   border-radius: 20px;
