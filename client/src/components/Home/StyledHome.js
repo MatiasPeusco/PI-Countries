@@ -24,6 +24,7 @@ export const List = styled.div`
 export const Section = styled.section`
   max-width: 1200px;
   margin: 40px auto 80px;
+  box-sizing: border-box;
 
   @media screen and (max-width: 1000px) {
     padding: 0 20px;
@@ -78,6 +79,16 @@ export const SearchButton = styled.button`
     color: #fff;
     border-color: #6e47db;
   }
+`;
+
+export const Chip = styled.span`
+  color: #6e47db;
+  background: #f4f3ff;
+  margin-right: 20px;
+  border: 1px solid #6e47db;
+  border-radius: 16px;
+  padding: 0 16px;
+  cursor: pointer;
 `;
 
 export const ButtonsContainer = styled.div`

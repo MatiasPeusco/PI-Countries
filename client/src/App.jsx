@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage/LandingPage";
 import About from "./components/About/About";
 import Home from "./components/Home/Home";
 import CountryDetail from "./components/CountryDetail/CountryDetail";
+import CreateActivity from "./components/CreateActivity/CreateActivity";
 
 function App() {
   return (
@@ -13,7 +14,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/countries/:id" element={<CountryDetail />} />
-        <Route path="/create" element={<div>CREAR</div>} />
+        <Route path="/create" element={<CreateActivity />} />
       </Routes>
     </BrowserRouter>
   );
