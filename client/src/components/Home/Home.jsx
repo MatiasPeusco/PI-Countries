@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
 import Pagination from "../Pagination/Pagination";
 import CountriesList from "../CountriesList/CountriesList";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const Home = () => {
                 totalPages={Math.ceil(countries.length / countriesPerPage)}
                 onPageChange={paginate}
             />
+            <Footer />
         </>
     );
 };

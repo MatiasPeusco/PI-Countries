@@ -1,8 +1,20 @@
+import {
+    Container,
+    Image,
+    ImageContainer,
+    Left,
+    TechnologiesContainer,
+} from "./StyledAbout";
+import { Link } from "react-router-dom";
+import react from "../../assets/images/react.svg";
+import redux from "../../assets/images/redux.svg";
+import nodejs from "../../assets/images/nodejs.svg";
 import express from "../../assets/images/express.svg";
 import postgresql from "../../assets/images/postgresql.svg";
 import sequelize from "../../assets/images/sequelize.svg";
 import Navbar from "../Navbar/Navbar";
 import GoBackComponent from "../GoBack/goback";
+import Footer from "../Footer/Footer";
 
 const About = () => {
     return (
@@ -58,6 +70,7 @@ const About = () => {
                     </section>
                 </Left>
             </Container>
+            <Footer />
         </>
     );
 };

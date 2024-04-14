@@ -12,6 +12,7 @@ import {
     ImageContainer,
     Image,
 } from "./StyledCountryDetail";
+import Footer from "../Footer/Footer";
 
 const pais = {
     name: {
@@ -223,6 +224,7 @@ const CountryDetail = () => {
                     <Image src={pais.flags.png} />
                 </ImageContainer>
             </Section>
+            <Footer />
         </>
     );
 };
