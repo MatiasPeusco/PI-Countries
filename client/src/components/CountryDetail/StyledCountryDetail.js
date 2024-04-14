@@ -1,16 +1,5 @@
 import styled from "styled-components";
 
-export const StyledLine = styled.div`
-  background-color: #ebebeb;
-  height: 1px;
-  width: 93%;
-  margin: 60px auto;
-  
-  @media (min-width: 890px) {
-    width: 56%;
-  }
-`;
-
 export const Section = styled.section`
   max-width: 1000px;
   width: 100%;

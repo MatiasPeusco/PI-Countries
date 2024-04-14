@@ -3,7 +3,6 @@ import Navbar from "../Navbar/Navbar";
 import DetailInfo from "./DetailInfo";
 import { formatPopulation, formatArea } from "../../utils";
 import {
-    StyledLine,
     Section,
     DetailsContainer,
     ID,
@@ -12,6 +11,7 @@ import {
     ImageContainer,
     Image,
 } from "./StyledCountryDetail";
+import StyledLine from "../StyledLine";
 import Footer from "../Footer/Footer";
 
 const pais = {
