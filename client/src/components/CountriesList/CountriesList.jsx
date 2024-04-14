@@ -10,6 +10,7 @@ const CountriesList = ({ countries }) => {
                     countries.map((country) => (
                         <CountryCard
                             key={country.name.common}
+                            id={country.cca3}
                             image={country.flags.png}
                             name={country.name.common}
                             continent={country.continents[0]}
