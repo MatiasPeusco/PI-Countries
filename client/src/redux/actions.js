@@ -1,12 +1,25 @@
 import axios from "axios";
 
 export const GET_COUNTRIES = "GET_COUNTRIES";
+export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
 
 export const getCountries = () => {
     return async function (dispatch) {
         const response = await axios.get("http://localhost:5000/countries");
-        return dispatch({
+        dispatch({
             type: GET_COUNTRIES,
+            payload: response.data,
+        });
+    };
+};
+
+export const searchCountries = (searchTerm) => {
+    return async function (dispatch) {
+        const response = await axios.get(
+            `http://localhost:5000/countries?search=${searchTerm}`
+        );
+        dispatch({
+            type: SEARCH_COUNTRIES,
             payload: response.data,
         });
     };
