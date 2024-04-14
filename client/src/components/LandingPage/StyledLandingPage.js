@@ -19,6 +19,7 @@ export const TextContainer = styled.div`
   border-style: inset;
   border-radius: 16px;
   background: #373435; /* grey */
+  background: rgba(255, 255, 255, 0.9);
   position: absolute;
   z-index: 4;
   bottom: 30%;
@@ -29,15 +30,17 @@ export const TextContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 export const Title = styled.h1`
-  color: #ff0; /* henry-yellow */
+  color: #6e47db;
   font-size: 25px;
   margin: 0;
   margin-bottom: 20px;
   text-align: center;
 `;
+
 export const Paragraph = styled.p`
-  color: #fff;
+  color: #000;
   font-size: 15px;
 `;
 
