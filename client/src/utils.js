@@ -1,4 +1,4 @@
-import { sortCountriesAToZ } from "./redux/actions";
+import { sortCountries } from "./redux/actions";
 
 export const formatPopulation = (population) => {
     if (population >= 1000000) {
@@ -28,5 +28,39 @@ export const sortCountriesAZ = (dispatch, countries) => {
     });
 
     // Despachar la acción para actualizar el estado con el nuevo array ordenado
-    dispatch(sortCountriesAToZ(sortedCountries));
+    dispatch(sortCountries(sortedCountries));
+};
+
+export const sortCountriesZA = (dispatch, countries) => {
+    const sortedCountries = [...countries].sort((a, b) => {
+        const countryA = a.name.common.toUpperCase();
+        const countryB = b.name.common.toUpperCase();
+        if (countryA > countryB) {
+            return -1; // Cambiamos el orden de retorno
+        }
+        if (countryA < countryB) {
+            return 1; // Cambiamos el orden de retorno
+        }
+        return 0;
+    });
+
+    dispatch(sortCountries(sortedCountries));
+};
+
+export const sortCountriesByPopulationAsc = (dispatch, countries) => {
+    const sortedCountries = [...countries].sort((a, b) => {
+        const populationA = a.population;
+        const populationB = b.population;
+        return populationA - populationB;
+    });
+    dispatch(sortCountries(sortedCountries));
+};
+
+export const sortCountriesByPopulationDesc = (dispatch, countries) => {
+    const sortedCountries = [...countries].sort((a, b) => {
+        const populationA = a.population;
+        const populationB = b.population;
+        return populationB - populationA; // Orden descendente por población
+    });
+    dispatch(sortCountries(sortedCountries));
 };

@@ -1,7 +1,7 @@
 import {
     GET_COUNTRIES,
     SEARCH_COUNTRIES,
-    SORT_COUNTRIES_A_TO_Z,
+    SORT_COUNTRIES,
 } from "./actions";
 
 const initialState = {
@@ -23,7 +23,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 countries: action.payload,
             };
-        case SORT_COUNTRIES_A_TO_Z:
+        case SORT_COUNTRIES:
             return {
                 ...state,
                 countries: action.payload,

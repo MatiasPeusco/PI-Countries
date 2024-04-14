@@ -1,30 +1,66 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { sortCountriesAZ } from "../../utils";
-import { ButtonsContainer, Button } from "./StyledHome";
+import { searchCountries } from "../../redux/actions";
+import {
+    sortCountriesAZ,
+    sortCountriesZA,
+    sortCountriesByPopulationAsc,
+    sortCountriesByPopulationDesc,
+} from "../../utils";
+import { Chip, ButtonsContainer, Button } from "./StyledHome";
 import { Wrapper, DropdownMenu, DropdownItem } from "./StyledFilterAndSorting";
 import { CONTINENTS } from "../../constants";
 
 const FilterAndSorting = () => {
-
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
     const [showSortDropdown, setShowSortDropdown] = useState(false);
+    const [appliedFilter, setAppliedFilter] = useState(null);
     const dispatch = useDispatch();
+    const allCountries = useSelector((state) => state.allCountries);
     const countries = useSelector((state) => state.countries);
 
     const toggleFilterDropdown = () => {
         setShowFilterDropdown(!showFilterDropdown);
     };
+
     const toggleSortDropdown = () => {
         setShowSortDropdown(!showSortDropdown);
     };
 
+    const clearAppliedFilter = () => {
+        dispatch(searchCountries(allCountries));
+        setAppliedFilter(null);
+    };
+
     const handleSortAZ = () => {
         sortCountriesAZ(dispatch, countries);
+        setShowSortDropdown(false);
+        setAppliedFilter("A - Z");
+    };
+
+    const handleSortZA = () => {
+        sortCountriesZA(dispatch, countries);
+        setShowSortDropdown(false);
+        setAppliedFilter("Z - A");
+    };
+
+    const handleSortPopulationAsc = () => {
+        sortCountriesByPopulationAsc(dispatch, countries);
+        setShowSortDropdown(false);
+        setAppliedFilter("Población Asc.");
+    };
+
+    const handleSortPopulationDesc = () => {
+        sortCountriesByPopulationDesc(dispatch, countries);
+        setShowSortDropdown(false);
+        setAppliedFilter("Población Desc.");
     };
 
     return (
         <ButtonsContainer>
+            {appliedFilter && (
+                <Chip onClick={clearAppliedFilter}>{appliedFilter} &#x2715;</Chip>
+            )}
             <Wrapper>
                 <Button type="button" onClick={() => toggleFilterDropdown()}>
                     Filtrar
@@ -56,23 +92,11 @@ const FilterAndSorting = () => {
                 {showSortDropdown && (
                     <DropdownMenu>
                         <DropdownItem onClick={handleSortAZ}>A - Z</DropdownItem>
-                        <DropdownItem
-                            onClick={() => console.log("Ordenar alfabéticamente ascendente")}
-                        >
-                            Z - A
-                        </DropdownItem>
-                        <DropdownItem
-                            onClick={() =>
-                                console.log("Ordenar por cantidad de población ascendente")
-                            }
-                        >
+                        <DropdownItem onClick={handleSortZA}>Z - A</DropdownItem>
+                        <DropdownItem onClick={handleSortPopulationAsc}>
                             Población asc.
                         </DropdownItem>
-                        <DropdownItem
-                            onClick={() =>
-                                console.log("Ordenar por cantidad de población descendente")
-                            }
-                        >
+                        <DropdownItem onClick={handleSortPopulationDesc}>
                             Población desc.
                         </DropdownItem>
                     </DropdownMenu>
