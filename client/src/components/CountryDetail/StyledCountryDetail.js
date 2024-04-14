@@ -7,12 +7,27 @@ export const Section = styled.section`
   display: flex;
   margin: 40px auto;
   padding: 0 20px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+
+  @media (max-width: 1200px) {
+    justify-content: space-around;
+    flex-direction: column-reverse;
+  }
+
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 `;
 
 export const DetailsContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  @media (max-width: 1200px) {
+    flex-grow: 0;
+  }
 `;
 
 export const ID = styled.span`
@@ -61,6 +76,14 @@ export const ImageContainer = styled.div`
   flex-grow: 1;
   display: flex;
   justify-content: center;
+
+  @media (max-width: 1200px) {
+    flex-grow: 0;
+  }
+
+  @media (max-width: 768px) {
+    margin-bottom: 30px;
+  }
 `;
 
 export const Image = styled.img`
