@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export const SearcherContainer = styled.div`
@@ -23,6 +24,10 @@ export const List = styled.div`
 export const Section = styled.section`
   max-width: 1200px;
   margin: 40px auto 80px;
+
+  @media screen and (max-width: 1000px) {
+    padding: 0 20px;
+  }
 `;
 
 export const Searcher = styled.form`
@@ -36,8 +41,16 @@ export const SearchInput = styled.input`
   border: 1px solid #373435;
   box-shadow: 0rem 0.0625rem 0.125rem 0rem rgba(16, 24, 40, 0.05);
   font-size: 1rem;
-  width: 22.5rem;
+  width: 400px;
   margin: 0;
+
+  @media screen and (max-width: 992px) {
+    width: 300px;
+  }
+
+  @media screen and (max-width: 600px) {
+    width: 250px;
+  }
 `;
 
 export const SearchButton = styled.button`
@@ -64,6 +77,11 @@ export const ButtonsContainer = styled.div`
   justify-content: flex-end;
   align-items: flex-end;
   flex-grow: 1;
+
+  @media screen and (max-width: 680px) {
+    padding: 20px 0;
+    justify-content: flex-start;
+  }
 `;
 
 export const Button = styled.button`

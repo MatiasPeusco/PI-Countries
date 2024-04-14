@@ -5,7 +5,7 @@ export const PaginationContainer = styled.ul`
   flex-wrap: wrap;
   list-style: none;
   padding: 0;
-  margin-top: 60px;
+  margin: 60px;
   display: flex;
   justify-content: center;
 `;
@@ -39,7 +39,7 @@ export const PaginationButton = styled.button`
     cursor: not-allowed;
     opacity: 0.6;
   }
-  
+
   @media screen and (max-width: 768px) {
     padding: 3px 8px;
   }

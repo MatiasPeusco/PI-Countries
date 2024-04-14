@@ -16,6 +16,7 @@ export const Left = styled.div`
   justify-content: center;
   flex-flow: column nowrap;
   text-align: center;
+
   ul {
     display: inline-block;
   }
@@ -31,6 +32,7 @@ export const Right = styled.div`
 `;
 export const TechnologiesContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin: 10px 0;
   padding-top: 20px;
@@ -54,14 +56,17 @@ export const Contact = styled.div`
   align-items: center;
   height: 2rem;
   gap: 5px;
+
   span {
     font-size: 1.2rem;
   }
+
   .icon {
     font-size: 1.5rem;
     color: ${(props) => props.theme.colors.primary};
     text-align: center;
     transition: 0.2s ease;
+
     &:hover {
       color: ${(props) => props.theme.colors.secondary};
     }

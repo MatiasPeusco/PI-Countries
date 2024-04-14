@@ -11,17 +11,30 @@ export const Card = styled.article`
   background: #fff;
   border: 0.0625rem solid #eaecf0;
   border-radius: 1.5rem;
+
+  @media screen and (max-width: 560px) {
+    width: 100%;
+  }
 `;
 
 export const ImageContainer = styled.div`
   width: 250px;
   position: relative;
-  
+
   & > img {
     object-fit: cover;
     position: relative;
     border-top-right-radius: 1.26rem;
     border-top-left-radius: 1.26rem;
+
+    @media screen and (max-width: 560px) {
+    width: 100%;
+    height: 250px;
+  }
+  }
+
+  @media screen and (max-width: 560px) {
+    width: 100%;
   }
 `;
 
