@@ -1,16 +1,18 @@
 import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SearchComponent from "./SearchComponent";
-import { Section, H2Title } from "./StyledHome";
 import { useDispatch, useSelector } from "react-redux";
 import { getCountries } from "../../redux/actions";
 import Pagination from "../Pagination/Pagination";
+import CountriesList from "../CountriesList/CountriesList";
 
 const Home = () => {
+
     const dispatch = useDispatch();
     const countries = useSelector((state) => state.countries);
     const [currentPage, setCurrentPage] = useState(1);
     const countriesPerPage = 10;
+
 
     useEffect(() => {
         dispatch(getCountries());
@@ -32,24 +34,13 @@ const Home = () => {
         <>
             <Navbar />
             <SearchComponent />
-            <Section>
-                <H2Title>Listado de paises:</H2Title>
-                <div>
-                    {currentCountries &&
-                        currentCountries.map((country) => (
-                            <div key={country.name.common}>
-                                <p>{country.name.common}</p>
-                            </div>
-                        ))}
-                </div>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={Math.ceil(countries.length / countriesPerPage)}
-                    onPageChange={paginate}
-                />
-            </Section>
+            <CountriesList countries={currentCountries} />
+            <Pagination
+                currentPage={currentPage}
+                totalPages={Math.ceil(countries.length / countriesPerPage)}
+                onPageChange={paginate}
+            />
         </>
     );
 };
-
 export default Home;

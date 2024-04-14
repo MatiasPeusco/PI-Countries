@@ -13,9 +13,16 @@ export const H2Title = styled.h2`
   font-size: 2.25rem;
 `;
 
+export const List = styled.div`
+  margin-top: 80px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 50px 20px;
+`;
+
 export const Section = styled.section`
-  max-width: 1000px;
-  margin: 50px auto 100px;
+  max-width: 1200px;
+  margin: 40px auto 80px;
 `;
 
 export const Searcher = styled.form`
@@ -44,6 +51,7 @@ export const SearchButton = styled.button`
   font-weight: 600;
   width: fit-content;
   cursor: pointer;
+
   &:hover {
     background: #6e47db;
     color: #fff;
@@ -70,6 +78,7 @@ export const Button = styled.button`
   font-size: 14px;
   transition: 0.2s ease;
   cursor: pointer;
+
   &:hover {
     border-style: inset;
   }
