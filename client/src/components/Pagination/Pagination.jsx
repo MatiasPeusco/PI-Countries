@@ -12,7 +12,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     };
 
     return (
-        <nav>
+        <>
             <PaginationContainer>
                 <PaginationItem className="page-item">
                     <PaginationButton
@@ -41,7 +41,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     </PaginationButton>
                 </PaginationItem>
             </PaginationContainer>
-        </nav>
+        </>
     );
 };
 
