@@ -17,7 +17,7 @@ const SelectInputComponent = ({
     return (
         <InputWrapper>
             <Label htmlFor={name}>{label}:</Label>
-            <Select id={id} name={name} value={value} onChange={onChange} required>
+            <Select id={id} name={name} value={value} onChange={onChange}>
                 {options.map((option, index) => (
                     <option key={index} value={option.value}>
                         {option.label}

@@ -75,5 +75,4 @@ export const ErrorMessage = styled.span`
   color: rgb(255, 0, 46);
   font-size: 13px;
   text-align: right;
-  margin-top: 8px;
 `;

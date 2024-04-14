@@ -46,21 +46,21 @@ const CreateActivity = () => {
         const newErrors = { ...errors };
 
         if (!name.match(/^[a-zA-Z\s]+$/)) {
-            newErrors.name = "El nombre solo puede contener letras y espacios";
+            newErrors.name = "*El nombre solo puede contener letras y espacios";
             isValid = false;
         } else {
             newErrors.name = "";
         }
 
         if (difficulty === "0") {
-            newErrors.difficulty = "Por favor selecciona la dificultad";
+            newErrors.difficulty = "*Por favor selecciona la dificultad";
             isValid = false;
         } else {
             newErrors.difficulty = "";
         }
 
         if (season === "") {
-            newErrors.season = "Por favor selecciona la temporada";
+            newErrors.season = "*Por favor selecciona la temporada";
             isValid = false;
         } else {
             newErrors.season = "";
@@ -101,7 +101,6 @@ const CreateActivity = () => {
                             placeholder="Escribe el nombre de la actividad"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            required
                         />
                         {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
                     </InputWrapper>
