@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchCountries } from "../../redux/actions";
 import {
+    filterCountriesByContinent,
     sortCountriesAZ,
     sortCountriesZA,
     sortCountriesByPopulationAsc,
@@ -30,6 +31,12 @@ const FilterAndSorting = () => {
     const clearAppliedFilter = () => {
         dispatch(searchCountries(allCountries));
         setAppliedFilter(null);
+    };
+
+    const handleContinentFilter = (continent) => {
+        filterCountriesByContinent(dispatch, allCountries, continent);
+        setShowFilterDropdown(false);
+        setAppliedFilter(`${continent}`);
     };
 
     const handleSortAZ = () => {
@@ -70,7 +77,7 @@ const FilterAndSorting = () => {
                         {CONTINENTS.map((continent, index) => (
                             <DropdownItem
                                 key={index}
-                                onClick={() => console.log(continent.value)}
+                                onClick={() => handleContinentFilter(continent.value)}
                             >
                                 {continent.name}
                             </DropdownItem>

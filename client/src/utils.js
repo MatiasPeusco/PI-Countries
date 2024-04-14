@@ -1,4 +1,4 @@
-import { sortCountries } from "./redux/actions";
+import { sortCountries, filterCountries } from "./redux/actions";
 
 export const formatPopulation = (population) => {
     if (population >= 1000000) {
@@ -51,7 +51,7 @@ export const sortCountriesByPopulationAsc = (dispatch, countries) => {
     const sortedCountries = [...countries].sort((a, b) => {
         const populationA = a.population;
         const populationB = b.population;
-        return populationA - populationB;
+        return populationA - populationB; // Orden ascendente por población
     });
     dispatch(sortCountries(sortedCountries));
 };
@@ -63,4 +63,14 @@ export const sortCountriesByPopulationDesc = (dispatch, countries) => {
         return populationB - populationA; // Orden descendente por población
     });
     dispatch(sortCountries(sortedCountries));
+};
+
+export const filterCountriesByContinent = (dispatch, countries, continent) => {
+    // Filtrar los países que pertenecen al continente especificado
+    const filteredCountries = countries.filter((country) =>
+        country.continents.includes(continent)
+    );
+
+    // Despachar la acción para actualizar el estado con los países filtrados
+    dispatch(filterCountries(filteredCountries));
 };

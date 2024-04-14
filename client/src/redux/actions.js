@@ -1,8 +1,10 @@
 import axios from "axios";
-
-export const GET_COUNTRIES = "GET_COUNTRIES";
-export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
-export const SORT_COUNTRIES = "SORT_COUNTRIES";
+import {
+    GET_COUNTRIES,
+    SEARCH_COUNTRIES,
+    SORT_COUNTRIES,
+    FILTER_COUNTRIES,
+} from "../constants";
 
 export const getCountries = () => {
     return async function (dispatch) {
@@ -29,4 +31,9 @@ export const searchCountries = (searchTerm) => {
 export const sortCountries = (sortedCountries) => ({
     type: SORT_COUNTRIES,
     payload: sortedCountries,
+});
+
+export const filterCountries = (filteredCountries) => ({
+    type: FILTER_COUNTRIES,
+    payload: filteredCountries,
 });
