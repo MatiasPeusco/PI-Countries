@@ -21,7 +21,7 @@ const About = () => {
                 <section>
                     <h2>About this application</h2>
                     <p>
-                        Pooches is a website to learn more about dogs. It is my individual
+                        Countries is a website to learn more about countries. It is my individual
                         project in the Soy Henry Bootcamp.
                     </p>
                 </section>
