@@ -1,20 +1,6 @@
 const axios = require('axios');
 const { Country } = require('./db');
 
-// Función para verificar si la base de datos ya está poblada
-async function isDatabasePopulated() {
-    try {
-        // Consulta la cantidad de registros en la tabla Country
-        const count = await Country.count();
-        console.log('Cantidad de registros en la tabla Country:', count);
-        // Devuelve true si la tabla tiene al menos un registro, false de lo contrario
-        return count > 0;
-    } catch (error) {
-        console.error('Error al verificar si la base de datos está poblada:', error);
-        return false;
-    }
-}
-
 // Función para poblar la base de datos con la información de los países
 async function populateDatabase() {
     try {
