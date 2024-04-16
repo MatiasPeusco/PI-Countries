@@ -9,6 +9,7 @@ import {
     RESET_COUNTRIES_LIST,
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
+    GET_ACTIVITIES,
 } from "../constants";
 
 export const getCountries = () => {
@@ -101,5 +102,15 @@ export const createActivity = (newActivity) => {
         } catch (error) {
             dispatch({ type: CREATE_ACTIVITY_FAILURE, payload: error });
         }
+    };
+};
+
+export const getActivities = () => {
+    return async function (dispatch) {
+        const response = await axios.get("http://localhost:3001/activities");
+        dispatch({
+            type: GET_ACTIVITIES,
+            payload: response.data,
+        });
     };
 };

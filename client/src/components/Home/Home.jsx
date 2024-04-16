@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import SearchComponent from "./SearchComponent";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../../redux/actions";
+import { getActivities, getCountries } from "../../redux/actions";
 import Pagination from "../Pagination/Pagination";
 import CountriesList from "../CountriesList/CountriesList";
 import Footer from "../Footer/Footer";
@@ -15,6 +15,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(getCountries());
+        dispatch(getActivities());
     }, [dispatch]);
 
     // Calcular el índice del último país de la página actual

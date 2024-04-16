@@ -8,9 +8,11 @@ import {
     RESET_COUNTRIES_LIST,
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
+    GET_ACTIVITIES,
 } from "../constants";
 
 const initialState = {
+    activities: [],
     countries: [],
     allCountries: [],
     error: {
@@ -77,6 +79,11 @@ function rootReducer(state = initialState, action) {
                     code: action.payload.code,
                     status: action.payload.response.status,
                 },
+            };
+        case GET_ACTIVITIES:
+            return {
+                ...state,
+                activities: action.payload,
             };
         default:
             return state;
