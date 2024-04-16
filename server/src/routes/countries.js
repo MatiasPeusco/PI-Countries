@@ -7,28 +7,34 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const { name } = req.query; // Obtener el valor del parámetro de consulta 'name'
+        const { name, continent } = req.query; // Obtener los valores de los parámetros de consulta
 
+        let filter = {}; // Objeto para almacenar los filtros de búsqueda dinámicos
+
+        // Agregar filtro por nombre si se proporciona el parámetro 'name'
         if (name) {
-            // Si se proporciona el parámetro de consulta 'name', buscar países por nombre
-            const countries = await Country.findAll({
-                where: {
-                    name: {
-                        [Op.iLike]: `%${name}%` // Utilizar Op.iLike para buscar de manera insensible a mayúsculas y minúsculas
-                    }
-                }
-            });
-
-            if (countries.length === 0) {
-                return res.status(404).json({ message: 'No se encontraron países con ese nombre.' });
-            }
-
-            return res.status(200).json(countries);
-        } else {
-            // Si no se proporciona el parámetro de consulta 'name', obtener todos los países
-            const countries = await Country.findAll();
-            return res.status(200).json(countries);
+            filter.name = {
+                [Op.iLike]: `%${name}%`
+            };
         }
+
+        // Agregar filtro por continente si se proporciona el parámetro 'continent'
+        if (continent) {
+            filter.continent = continent;
+        }
+
+        // Realizar la búsqueda en la base de datos con los filtros aplicados
+        const countries = await Country.findAll({
+            where: filter // Aplicar los filtros dinámicos
+        });
+
+        // Verificar si se encontraron países
+        if (countries.length === 0) {
+            return res.status(404).json({ message: 'No se encontraron países que coincidan con los filtros proporcionados.' });
+        }
+
+        // Devolver la lista de países que coinciden con los filtros
+        return res.status(200).json(countries);
     } catch (error) {
         next(error);
     }
