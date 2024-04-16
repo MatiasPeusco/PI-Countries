@@ -1,6 +1,6 @@
 import { useState } from "react";
 // import { useDispatch } from "react-redux";
-import { searchCountries } from "../../redux/actions";
+import { resetCountriesList, searchCountries } from "../../redux/actions";
 import {
     Wrapper,
     SearcherContainer,
@@ -11,18 +11,17 @@ import {
     DeleteSearch,
     SearchButton,
 } from "./StyledHome";
-
 import { useDispatch, useSelector } from "react-redux";
 import FilterAndSorting from "./FilterAndSorting";
 
 const SearchComponent = ({ resetPagination }) => {
+
     const dispatch = useDispatch();
     const [searchTerm, setSearchTerm] = useState("");
     const allCountries = useSelector((state) => state.allCountries);
 
     const handleSearch = () => {
         dispatch(searchCountries(searchTerm));
-        setSearchTerm("");
     };
 
     const handleChange = (e) => {
@@ -30,8 +29,8 @@ const SearchComponent = ({ resetPagination }) => {
     };
 
     const handleClear = () => {
+        dispatch(resetCountriesList(allCountries)); // Restaurar la lista de países original
         setSearchTerm("");
-        dispatch(searchCountries(allCountries)); // Restaurar la lista de países original
         resetPagination();
     };
 

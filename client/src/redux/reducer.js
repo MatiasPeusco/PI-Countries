@@ -1,76 +1,48 @@
-import { sortCountries, filterCountries } from "./redux/actions";
+import {
+    GET_COUNTRIES,
+    SEARCH_COUNTRIES,
+    SORT_COUNTRIES,
+    FILTER_COUNTRIES,
+    RESET_COUNTRIES_LIST,
+} from "../constants";
 
-export const formatPopulation = (population) => {
-    if (population >= 1000000) {
-        return (population / 1000000).toFixed(1) + " M";
-    } else if (population >= 1000) {
-        return (population / 1000).toFixed(1) + " K";
-    } else {
-        return population;
+const initialState = {
+    countries: [],
+    allCountries: [],
+};
+
+// Reducer principal que maneja las acciones y actualiza el estado en consecuencia
+function rootReducer(state = initialState, action) {
+    switch (action.type) {
+        case GET_COUNTRIES:
+            return {
+                ...state,
+                countries: action.payload,
+                allCountries: action.payload,
+            };
+        case SEARCH_COUNTRIES:
+            return {
+                ...state,
+                countries: action.payload,
+            };
+        case SORT_COUNTRIES:
+            return {
+                ...state,
+                countries: action.payload,
+            };
+        case FILTER_COUNTRIES:
+            return {
+                ...state,
+                countries: action.payload,
+            };
+        case RESET_COUNTRIES_LIST:
+            return {
+                ...state,
+                countries: action.payload,
+            };
+        default:
+            return state;
     }
-};
+}
 
-export const formatArea = (area) => {
-    return area.toLocaleString() + " m²";
-};
-
-export const sortCountriesAZ = (dispatch, countries) => {
-    const sortedCountries = [...countries].sort((a, b) => {
-        const countryA = a.name.common.toUpperCase();
-        const countryB = b.name.common.toUpperCase();
-        if (countryA < countryB) {
-            return -1;
-        }
-        if (countryA > countryB) {
-            return 1;
-        }
-        return 0;
-    });
-
-    // Despachar la acción para actualizar el estado con el nuevo array ordenado
-    dispatch(sortCountries(sortedCountries));
-};
-
-export const sortCountriesZA = (dispatch, countries) => {
-    const sortedCountries = [...countries].sort((a, b) => {
-        const countryA = a.name.common.toUpperCase();
-        const countryB = b.name.common.toUpperCase();
-        if (countryA > countryB) {
-            return -1; // Cambiamos el orden de retorno
-        }
-        if (countryA < countryB) {
-            return 1; // Cambiamos el orden de retorno
-        }
-        return 0;
-    });
-
-    dispatch(sortCountries(sortedCountries));
-};
-
-export const sortCountriesByPopulationAsc = (dispatch, countries) => {
-    const sortedCountries = [...countries].sort((a, b) => {
-        const populationA = a.population;
-        const populationB = b.population;
-        return populationA - populationB; // Orden ascendente por población
-    });
-    dispatch(sortCountries(sortedCountries));
-};
-
-export const sortCountriesByPopulationDesc = (dispatch, countries) => {
-    const sortedCountries = [...countries].sort((a, b) => {
-        const populationA = a.population;
-        const populationB = b.population;
-        return populationB - populationA; // Orden descendente por población
-    });
-    dispatch(sortCountries(sortedCountries));
-};
-
-export const filterCountriesByContinent = (dispatch, countries, continent) => {
-    // Filtrar los países que pertenecen al continente especificado
-    const filteredCountries = countries.filter((country) =>
-        country.continents.includes(continent)
-    );
-
-    // Despachar la acción para actualizar el estado con los países filtrados
-    dispatch(filterCountries(filteredCountries));
-};
+export default rootReducer;
