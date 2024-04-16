@@ -59,6 +59,13 @@ const CreateActivity = () => {
             newErrors.difficulty = "";
         }
 
+        if (!duration.match(/^\d+(\.\d+)?$/)) {
+            newErrors.duration = "La duración debe ser un número válido";
+            isValid = false;
+        } else {
+            newErrors.duration = "";
+        }
+
         if (season === "") {
             newErrors.season = "*Por favor selecciona la temporada";
             isValid = false;
@@ -122,7 +129,18 @@ const CreateActivity = () => {
                         error={errors.difficulty}
                     />
 
-                    <h4>Aqui va el input / select de Duración</h4>
+                    <InputWrapper>
+                        <Label htmlFor="duration">Duración (en horas):</Label>
+                        <Input
+                            type="text"
+                            id="duration"
+                            name="duration"
+                            placeholder="Escribe la duración en horas"
+                            value={duration}
+                            onChange={(e) => setDuration(e.target.value)}
+                        />
+                        {errors.duration && <ErrorMessage>{errors.duration}</ErrorMessage>}
+                    </InputWrapper>
 
                     <SelectInputComponent
                         id="season"
