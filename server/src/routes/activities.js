@@ -5,5 +5,13 @@ const errorHandler = require("../middlewares/errorHandler");
 
 const router = Router();
 
-module.exports = router;
+router.get('/', async (req, res, next) => {
+    try {
+        const activities = await Activity.findAll();
+        res.status(200).json(activities);
+    } catch (error) {
+        next(error);
+    }
+});
 
+module.exports = router;
