@@ -1,46 +1,44 @@
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { List, ListItem, Logo, Nav } from "./StyledNavbar";
+import { useState, useEffect } from "react";
 
-export const Nav = styled.nav`
-  width: 100%;
-  height: 80px;
-  padding: 0 30px;
-  margin-bottom: 30px;
-  box-sizing: border-box;
-  background: #fff;
-  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.07);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: ${({ navScroll }) =>
-        navScroll ? "0 10px 20px 0 rgba(0,0,0,.07)" : "null"};
-  position: sticky;
-  top: 0;
-  z-index: 2;
-  transition: 0.2s ease;
-`;
+const Navbar = () => {
+  // Estado para controlar si la barra de navegación debe cambiar de estilo al hacer scroll
+  const [navScroll, setNavScroll] = useState(false);
 
-export const Logo = styled.div`
-  font-size: 30px;
-  font-weight: 800;
-`;
-
-export const List = styled.ul`
-  display: flex;
-  list-style: none;
-  flex-flow: row nowrap;
-`;
-
-export const ListItem = styled.li`
-  margin-right: 8px;
-  padding: 10px;
-
-  a {
-    text-decoration: none;
-    color: #000;
-    transition: color 0.3s ease;
-
-    &:hover {
-      color: #6e47db;
+  // Función que cambia el estado de la barra de navegación al hacer scroll
+  const changeNav = () => {
+    if (window.scrollY >= 90) {
+      setNavScroll(true);
+    } else {
+      setNavScroll(false);
     }
-  }
-`;
+  };
+
+  // Efecto que se ejecuta al montar el componente para añadir un listener de scroll
+  useEffect(() => {
+    window.addEventListener("scroll", changeNav);
+    return () => {
+      window.removeEventListener("scroll", changeNav);
+    };
+  }, []);
+
+  return (
+    <Nav navScroll={navScroll}>
+      <Logo>Countries</Logo>
+      <List>
+        <ListItem>
+          <Link to="/home">Inicio</Link>
+        </ListItem>
+        <ListItem>
+          <Link to="/about">Sobre mi</Link>
+        </ListItem>
+        <ListItem>
+          <Link to="/create">Crear actividad</Link>
+        </ListItem>
+      </List>
+    </Nav>
+  );
+};
+
+export default Navbar;
