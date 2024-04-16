@@ -8,7 +8,12 @@ import {
     sortCountriesZA,
 } from "../../redux/actions";
 import { Chip, ButtonsContainer, Button } from "./StyledHome";
-import { Wrapper, DropdownMenu, DropdownItem } from "./StyledFilterAndSorting";
+import {
+    Wrapper,
+    DropdownMenu,
+    DropdownItem,
+    ItemSeparator,
+} from "./StyledFilterAndSorting";
 import { CONTINENTS } from "../../constants";
 
 const FilterAndSorting = () => {
@@ -71,25 +76,33 @@ const FilterAndSorting = () => {
                 </Button>
                 {showFilterDropdown && (
                     <DropdownMenu>
-                        {CONTINENTS.map((continent, index) => (
-                            <DropdownItem
-                                key={index}
-                                onClick={() => handleContinentFilter(continent.value)}
-                            >
-                                {continent.name}
-                            </DropdownItem>
-                        ))}
-                        {activities.length > 0 &&
-                            activities.map((activity) => (
+                        <>
+                            {CONTINENTS && <ItemSeparator>Continente</ItemSeparator>}
+                            {CONTINENTS.map((continent, index) => (
                                 <DropdownItem
-                                    key={activity.id}
-                                    onClick={() =>
-                                        console.log("Filtrar por tipo de actividad turística")
-                                    }
+                                    key={index}
+                                    onClick={() => handleContinentFilter(continent.value)}
                                 >
-                                    {activity.name}
+                                    {continent.name}
                                 </DropdownItem>
                             ))}
+                            {activities && (
+                                <ItemSeparator style={{ marginTop: "5px" }}>
+                                    Actividad
+                                </ItemSeparator>
+                            )}
+                            {activities.length > 0 &&
+                                activities.map((activity) => (
+                                    <DropdownItem
+                                        key={activity.id}
+                                        onClick={() =>
+                                            console.log("Filtrar por tipo de actividad turística")
+                                        }
+                                    >
+                                        {activity.name}
+                                    </DropdownItem>
+                                ))}
+                        </>
                     </DropdownMenu>
                 )}
             </Wrapper>

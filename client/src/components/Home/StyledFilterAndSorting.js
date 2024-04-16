@@ -22,3 +22,9 @@ export const DropdownItem = styled.div`
     background-color: #f2f2f2;
   }
 `;
+
+export const ItemSeparator = styled.div`
+  color: #6e47db;
+  padding: 3px 5px 8px;
+  border-bottom: 1px solid #6e47db;
+`;
