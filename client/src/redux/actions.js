@@ -93,11 +93,13 @@ export const resetCountriesList = (countries) => ({
 export const createActivity = (newActivity) => {
     return async function (dispatch) {
         try {
-            const response = await axios.post("http://localhost:3001/activities", newActivity);
-            console.log(response)
-            dispatch({ type: CREATE_ACTIVITY_SUCCESS, payload: response.data });
+            const response = await axios.post(
+                "http://localhost:3001/activities",
+                newActivity
+            );
+            dispatch({ type: CREATE_ACTIVITY_SUCCESS, payload: response });
         } catch (error) {
-            dispatch({ type: CREATE_ACTIVITY_FAILURE, payload: error.message });
+            dispatch({ type: CREATE_ACTIVITY_FAILURE, payload: error });
         }
     };
 };
