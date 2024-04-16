@@ -13,6 +13,10 @@ import {
     Input,
     Button,
     ErrorMessage,
+    SelectedCountriesList,
+    CountrySelected,
+    SuggestedCountriesList,
+    SuggestedCountriesItem,
 } from "./StyledCreateActivity";
 import SelectInputComponent from "./SelectInputComponent";
 import { useSelector } from "react-redux";
@@ -178,14 +182,9 @@ const CreateActivity = () => {
                         ]}
                         error={errors.season}
                     />
-
+                    {/* TO DO: agregar validacion para que tenga que haber al menos un pais seleccionado */}
                     <InputWrapper>
                         <Label>Pais:</Label>
-                        <ul>
-                            {selectedCountries.map((country) => (
-                                <li key={country.code}>{country.name}</li>
-                            ))}
-                        </ul>
                         <Input
                             type="text"
                             id="country"
@@ -195,17 +194,24 @@ const CreateActivity = () => {
                             onChange={handleCountryChange}
                         />
                     </InputWrapper>
-                    {suggestions.length > 0 && (
-                        <ul>
+                    <SelectedCountriesList>
+                        {selectedCountries.map((country) => (
+                            <CountrySelected key={country.code}>
+                                {country.name} &#x2715;
+                            </CountrySelected>
+                        ))}
+                    </SelectedCountriesList>
+                    {inputValue.length > 0 && suggestions.length > 0 && (
+                        <SuggestedCountriesList>
                             {suggestions.map((country) => (
-                                <li
+                                <SuggestedCountriesItem
                                     key={country.code}
                                     onClick={() => handleCountrySelect(country)}
                                 >
                                     {country.name}
-                                </li>
+                                </SuggestedCountriesItem>
                             ))}
-                        </ul>
+                        </SuggestedCountriesList>
                     )}
 
                     <Button type="submit">Crear Actividad Turística</Button>
