@@ -75,7 +75,7 @@ const CountryDetail = () => {
                     <Image src={countryData?.flagImage} />
                 </ImageContainer>
             </Section>
-            {countryData?.Activities && (
+            {countryData?.Activities.length > 0 && (
                 <Section>
                     <DetailsWrapper style={{ margin: "0 auto" }}>
                         <ul>
