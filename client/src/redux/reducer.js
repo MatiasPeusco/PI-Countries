@@ -1,7 +1,9 @@
 import {
     GET_COUNTRIES,
     SEARCH_COUNTRIES,
-    SORT_COUNTRIES,
+    SORT_COUNTRIES_Z_A,
+    SORT_BY_POPULATION_ASC,
+    SORT_BY_POPULATION_DESC,
     FILTER_COUNTRIES,
     RESET_COUNTRIES_LIST,
 } from "../constants";
@@ -25,7 +27,17 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 countries: action.payload,
             };
-        case SORT_COUNTRIES:
+        case SORT_COUNTRIES_Z_A:
+            return {
+                ...state,
+                countries: action.payload,
+            };
+        case SORT_BY_POPULATION_ASC:
+            return {
+                ...state,
+                countries: action.payload,
+            };
+        case SORT_BY_POPULATION_DESC:
             return {
                 ...state,
                 countries: action.payload,

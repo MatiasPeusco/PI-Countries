@@ -2,7 +2,9 @@ import axios from "axios";
 import {
     GET_COUNTRIES,
     SEARCH_COUNTRIES,
-    SORT_COUNTRIES,
+    SORT_COUNTRIES_Z_A,
+    SORT_BY_POPULATION_ASC,
+    SORT_BY_POPULATION_DESC,
     FILTER_COUNTRIES,
     RESET_COUNTRIES_LIST,
 } from "../constants";
@@ -29,10 +31,45 @@ export const searchCountries = (searchTerm) => {
     };
 };
 
-export const sortCountries = (sortedCountries) => ({
-    type: SORT_COUNTRIES,
-    payload: sortedCountries,
-});
+export const sortCountriesZA = () => {
+    return async function (dispatch) {
+        const response = await axios.get(
+            "http://localhost:3001/countries?orderBy=DESC"
+        );
+        dispatch({
+            type: SORT_COUNTRIES_Z_A,
+            payload: response.data,
+        });
+    };
+};
+
+export const sortByPopulationAsc = () => {
+    {
+        return async function (dispatch) {
+            const response = await axios.get(
+                "http://localhost:3001/countries?sortBy=population"
+            );
+            dispatch({
+                type: SORT_BY_POPULATION_ASC,
+                payload: response.data,
+            });
+        };
+    }
+};
+
+export const sortByPopulationDesc = () => {
+    {
+        return async function (dispatch) {
+            const response = await axios.get(
+                "http://localhost:3001/countries?sortBy=population&orderBy=DESC"
+            );
+            dispatch({
+                type: SORT_BY_POPULATION_DESC,
+                payload: response.data,
+            });
+        };
+    }
+};
 
 export const filterCountries = (filteredCountries) => ({
     type: FILTER_COUNTRIES,

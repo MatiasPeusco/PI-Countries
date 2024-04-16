@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchCountries } from "../../redux/actions";
+import {
+    resetCountriesList,
+    sortByPopulationAsc,
+    sortByPopulationDesc,
+    sortCountriesZA,
+} from "../../redux/actions";
 import {
     filterCountriesByContinent,
-    sortCountriesAZ,
-    sortCountriesZA,
-    sortCountriesByPopulationAsc,
-    sortCountriesByPopulationDesc,
 } from "../../utils";
 import { Chip, ButtonsContainer, Button } from "./StyledHome";
 import { Wrapper, DropdownMenu, DropdownItem } from "./StyledFilterAndSorting";
@@ -19,7 +20,6 @@ const FilterAndSorting = () => {
     const [appliedSorting, setAppliedSorting] = useState(null);
     const dispatch = useDispatch();
     const allCountries = useSelector((state) => state.allCountries);
-    const countries = useSelector((state) => state.countries);
 
     const toggleFilterDropdown = () => {
         setShowFilterDropdown(!showFilterDropdown);
@@ -30,12 +30,12 @@ const FilterAndSorting = () => {
     };
 
     const clearAppliedFilter = () => {
-        dispatch(searchCountries(allCountries));
+        dispatch(resetCountriesList(allCountries));
         setAppliedFilter(null);
     };
 
     const clearAppliedSorting = () => {
-        dispatch(searchCountries(allCountries));
+        dispatch(resetCountriesList(allCountries));
         setAppliedSorting(null);
     };
 
@@ -46,25 +46,25 @@ const FilterAndSorting = () => {
     };
 
     const handleSortAZ = () => {
-        sortCountriesAZ(dispatch, countries);
+        dispatch(resetCountriesList(allCountries));
         setShowSortDropdown(false);
         setAppliedSorting("A - Z");
     };
 
     const handleSortZA = () => {
-        sortCountriesZA(dispatch, countries);
+        dispatch(sortCountriesZA());
         setShowSortDropdown(false);
         setAppliedSorting("Z - A");
     };
 
     const handleSortPopulationAsc = () => {
-        sortCountriesByPopulationAsc(dispatch, countries);
+        dispatch(sortByPopulationAsc());
         setShowSortDropdown(false);
         setAppliedSorting("Población Asc.");
     };
 
     const handleSortPopulationDesc = () => {
-        sortCountriesByPopulationDesc(dispatch, countries);
+        dispatch(sortByPopulationDesc());
         setShowSortDropdown(false);
         setAppliedSorting("Población Desc.");
     };
