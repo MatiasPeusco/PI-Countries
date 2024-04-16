@@ -19,7 +19,8 @@ import {
     SuggestedCountriesItem,
 } from "./StyledCreateActivity";
 import SelectInputComponent from "./SelectInputComponent";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { createActivity } from "../../redux/actions";
 
 const CreateActivity = () => {
     const [name, setName] = useState("");
@@ -38,6 +39,15 @@ const CreateActivity = () => {
     const [inputValue, setInputValue] = useState("");
     const [suggestions, setSuggestions] = useState([]);
     const countries = useSelector((state) => state.allCountries);
+    const dispatch = useDispatch();
+
+    const clearAllInputs = () => {
+        setName("");
+        setDifficulty("");
+        setDuration("");
+        setSeason("");
+        setSelectedCountries([]);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -97,7 +107,7 @@ const CreateActivity = () => {
         }
 
         if (!duration.match(/^\d+(\.\d+)?$/)) {
-            newErrors.duration = "La duración debe ser un número válido";
+            newErrors.duration = "*La duración debe ser un número válido";
             isValid = false;
         } else {
             newErrors.duration = "";
@@ -110,6 +120,13 @@ const CreateActivity = () => {
             newErrors.season = "";
         }
 
+        if (!selectedCountries.length > 0) {
+            newErrors.countries = "*Por favor selecciona al menos un país";
+            isValid = false;
+        } else {
+            newErrors.countries = "";
+        }
+
         setErrors(newErrors);
         return isValid;
     };
@@ -117,7 +134,18 @@ const CreateActivity = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            // Aquí enviarías los datos del formulario
+            const newActivity = {
+                name,
+                difficulty,
+                duration,
+                season,
+                countries: selectedCountries.map((country) => ({ name: country.name })),
+            };
+
+            dispatch(createActivity(newActivity));
+
+            clearAllInputs();
+
             console.log("Formulario válido. Enviando datos...");
         } else {
             console.log("Formulario inválido. Por favor, revisa los campos.");
@@ -194,7 +222,7 @@ const CreateActivity = () => {
                         ]}
                         error={errors.season}
                     />
-                    {/* TO DO: agregar validacion para que tenga que haber al menos un pais seleccionado */}
+
                     <InputWrapper>
                         <Label>Pais:</Label>
                         <Input
@@ -205,6 +233,9 @@ const CreateActivity = () => {
                             value={inputValue}
                             onChange={handleCountryChange}
                         />
+                        {errors.countries && (
+                            <ErrorMessage>{errors.countries}</ErrorMessage>
+                        )}
                     </InputWrapper>
                     <SelectedCountriesList>
                         {selectedCountries.map((country, index) => (

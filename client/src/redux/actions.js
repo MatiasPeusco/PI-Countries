@@ -7,6 +7,8 @@ import {
     SORT_BY_POPULATION_DESC,
     FILTER_COUNTRIES_BY_CONTINENT,
     RESET_COUNTRIES_LIST,
+    CREATE_ACTIVITY_SUCCESS,
+    CREATE_ACTIVITY_FAILURE,
 } from "../constants";
 
 export const getCountries = () => {
@@ -87,3 +89,15 @@ export const resetCountriesList = (countries) => ({
     type: RESET_COUNTRIES_LIST,
     payload: countries,
 });
+
+export const createActivity = (newActivity) => {
+    return async function (dispatch) {
+        try {
+            const response = await axios.post("http://localhost:3001/activities", newActivity);
+            console.log(response)
+            dispatch({ type: CREATE_ACTIVITY_SUCCESS, payload: response.data });
+        } catch (error) {
+            dispatch({ type: CREATE_ACTIVITY_FAILURE, payload: error.message });
+        }
+    };
+};

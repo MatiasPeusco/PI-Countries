@@ -6,11 +6,14 @@ import {
     SORT_BY_POPULATION_DESC,
     FILTER_COUNTRIES_BY_CONTINENT,
     RESET_COUNTRIES_LIST,
+    CREATE_ACTIVITY_SUCCESS,
+    CREATE_ACTIVITY_FAILURE,
 } from "../constants";
 
 const initialState = {
     countries: [],
     allCountries: [],
+    error: null,
 };
 
 // Reducer principal que maneja las acciones y actualiza el estado en consecuencia
@@ -51,6 +54,18 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 countries: action.payload,
+            };
+        case CREATE_ACTIVITY_SUCCESS:
+            console.log(action.payload)
+            return {
+                ...state,
+                error: action.payload,
+            };
+        case CREATE_ACTIVITY_FAILURE:
+            console.log(action.payload)
+            return {
+                ...state,
+                error: action.payload,
             };
         default:
             return state;
