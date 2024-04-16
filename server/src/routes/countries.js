@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const { name, continent, orderBy } = req.query; // Obtener los valores de los parámetros de consulta
+        const { name, continent, orderBy, sortBy } = req.query; // Obtener los valores de los parámetros de consulta
 
         let filter = {}; // Objeto para almacenar los filtros de búsqueda dinámicos
         let order = [['name', 'ASC']]; // Orden predeterminado: alfabético ascendente
@@ -29,6 +29,11 @@ router.get('/', async (req, res, next) => {
             order[0][1] = 'DESC'; // Cambiar el orden a descendente si se solicita
         }
 
+        // Verificar si se proporciona el parámetro 'sortBy' y establecer la columna de orden correspondiente
+        if (sortBy && sortBy.toLowerCase() === 'population') {
+            order = [[sortBy, orderBy && orderBy.toLowerCase() === 'desc' ? 'DESC' : 'ASC']]; // Cambiar la columna de orden a 'population' y aplicar el orden especificado
+        }
+
         // Realizar la búsqueda en la base de datos con los filtros aplicados y el orden especificado
         const countries = await Country.findAll({
             where: filter, // Aplicar los filtros dinámicos
@@ -46,6 +51,7 @@ router.get('/', async (req, res, next) => {
         next(error);
     }
 });
+
 
 router.get('/:id', async (req, res, next) => {
     try {
