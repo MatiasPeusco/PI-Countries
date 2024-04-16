@@ -251,7 +251,7 @@ const CreateActivity = () => {
                         <SuggestedCountriesList>
                             {suggestions.map((country) => (
                                 <SuggestedCountriesItem
-                                    key={country.code}
+                                    key={country.name}
                                     onClick={() => handleCountrySelect(country)}
                                 >
                                     {country.name}
