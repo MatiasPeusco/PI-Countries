@@ -17,6 +17,7 @@ const FilterAndSorting = () => {
     const [label, setLabel] = useState(null);
     const dispatch = useDispatch();
     const allCountries = useSelector((state) => state.allCountries);
+    const activities = useSelector((state) => state.activities);
 
     const toggleFilterDropdown = () => {
         setShowFilterDropdown(!showFilterDropdown);
@@ -78,13 +79,17 @@ const FilterAndSorting = () => {
                                 {continent.name}
                             </DropdownItem>
                         ))}
-                        <DropdownItem
-                            onClick={() =>
-                                console.log("Filtrar por tipo de actividad turística")
-                            }
-                        >
-                            Filtrar por tipo de actividad turística
-                        </DropdownItem>
+                        {activities.length > 0 &&
+                            activities.map((activity) => (
+                                <DropdownItem
+                                    key={activity.id}
+                                    onClick={() =>
+                                        console.log("Filtrar por tipo de actividad turística")
+                                    }
+                                >
+                                    {activity.name}
+                                </DropdownItem>
+                            ))}
                     </DropdownMenu>
                 )}
             </Wrapper>
