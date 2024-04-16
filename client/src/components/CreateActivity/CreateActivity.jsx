@@ -61,7 +61,13 @@ const CreateActivity = () => {
     };
 
     const handleCountrySelect = (selectedCountry) => {
-        setSelectedCountries([...selectedCountries, selectedCountry]);
+        const isCountrySelected = selectedCountries.some(
+            (country) => country.name === selectedCountry.name
+        );
+
+        if (!isCountrySelected)
+            setSelectedCountries([...selectedCountries, selectedCountry]);
+
         setInputValue("");
         setSuggestions([]);
     };

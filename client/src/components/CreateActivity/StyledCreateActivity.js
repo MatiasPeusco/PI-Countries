@@ -1,225 +1,121 @@
-import { useState } from "react";
-import Footer from "../Footer/Footer";
-import GoBackComponent from "../GoBack/goback";
-import Navbar from "../Navbar/Navbar";
-import StyledLine from "../StyledLine";
-import {
-  Section,
-  Title,
-  Paragraph,
-  FormContainer,
-  InputWrapper,
-  Label,
-  Input,
-  Button,
-  ErrorMessage,
-  SelectedCountriesList,
-  CountrySelected,
-  SuggestedCountriesList,
-  SuggestedCountriesItem,
-} from "./StyledCreateActivity";
-import SelectInputComponent from "./SelectInputComponent";
-import { useSelector } from "react-redux";
+import styled from "styled-components";
 
-const CreateActivity = () => {
-  const [name, setName] = useState("");
-  const [difficulty, setDifficulty] = useState("0");
-  const [duration, setDuration] = useState("");
-  const [season, setSeason] = useState("");
-  const [selectedCountries, setSelectedCountries] = useState([]);
-  const [errors, setErrors] = useState({
-    name: "",
-    difficulty: "",
-    duration: "",
-    season: "",
-    countries: "",
-  });
+export const Section = styled.section`
+  max-width: 900px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+`;
 
-  const [inputValue, setInputValue] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
-  const countries = useSelector((state) => state.allCountries);
+export const Title = styled.h1`
+  font-size: 30px;
+  text-wrap: pretty;
+`;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "difficulty") {
-      setDifficulty(value);
-    } else if (name === "duration") {
-      setDuration(value);
-    } else if (name === "season") {
-      setSeason(value);
-    }
-  };
+export const Paragraph = styled.p`
+  font-size: 16px;
+  margin: 0;
+`;
 
-  const handleCountryChange = (e) => {
-    setInputValue(e.target.value);
+export const FormContainer = styled.form`
+  margin-top: 40px;
+  max-width: 400px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
 
-    const suggestions = countries.filter(
-      (country) =>
-        country.name.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
-    );
-    setSuggestions(suggestions);
-  };
+export const InputWrapper = styled.div`
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+`;
 
-  const handleCountrySelect = (selectedCountry) => {
-    setSelectedCountries([...selectedCountries, selectedCountry]);
-    setInputValue("");
-    setSuggestions([]);
-  };
+export const Label = styled.label`
+  color: #6e47db;
+  font-style: 13px;
+  margin-bottom: 8px;
+`;
 
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = { ...errors };
+export const Input = styled.input`
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 14px;
+`;
 
-    if (!name.match(/^[a-zA-Z\s]+$/)) {
-      newErrors.name = "*El nombre solo puede contener letras y espacios";
-      isValid = false;
-    } else {
-      newErrors.name = "";
-    }
+export const Select = styled.select`
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 14px;
+`;
 
-    if (difficulty === "0") {
-      newErrors.difficulty = "*Por favor selecciona la dificultad";
-      isValid = false;
-    } else {
-      newErrors.difficulty = "";
-    }
+export const SelectedCountriesList = styled.ul`
+  margin-top: 0;
+  margin-bottom: 20px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+`;
 
-    if (!duration.match(/^\d+(\.\d+)?$/)) {
-      newErrors.duration = "La duración debe ser un número válido";
-      isValid = false;
-    } else {
-      newErrors.duration = "";
-    }
+export const CountrySelected = styled.li`
+  color: #6e47db;
+  background: #f4f3ff;
+  width: fit-content;
+  border: 1px solid #6e47db;
+  border-radius: 10px;
+  padding: 0 16px;
+  cursor: pointer;
+`;
 
-    if (season === "") {
-      newErrors.season = "*Por favor selecciona la temporada";
-      isValid = false;
-    } else {
-      newErrors.season = "";
-    }
+export const SuggestedCountriesList = styled.ul`
+  max-height: 300px;
+  overflow-y: scroll;
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  margin: 0;
+  margin-top: -50px;
+  padding: 15px 20px;
+  list-style: none;
+  border: 0.0625rem solid rgb(234, 236, 240);
+  border-radius: 10px;
+`;
 
-    setErrors(newErrors);
-    return isValid;
-  };
+export const SuggestedCountriesItem = styled.li`
+  padding: 7px;
+  margin: 5px 0;
+  border: 0.0625rem solid rgb(234, 236, 240);
+  border-radius: 10px;
+  cursor: pointer;
+`;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // Aquí enviarías los datos del formulario
-      console.log("Formulario válido. Enviando datos...");
-    } else {
-      console.log("Formulario inválido. Por favor, revisa los campos.");
-    }
-  };
+export const Button = styled.button`
+  background: #ff0;
+  color: #000;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+`;
 
-  return (
-    <>
-      <Navbar />
-      <GoBackComponent />
-      <StyledLine />
-      <Section>
-        <Title>Formulario de Creación de Actividad Turística</Title>
-        <Paragraph>
-          Completa los siguientes campos para crear una nueva actividad
-          turística:
-        </Paragraph>
-        <FormContainer onSubmit={handleSubmit}>
-          <InputWrapper>
-            <Label htmlFor="name">Nombre:</Label>
-            <Input
-              type="text"
-              id="name"
-              name="name"
-              placeholder="Escribe el nombre de la actividad"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
-          </InputWrapper>
-
-          <SelectInputComponent
-            id="difficulty"
-            name="difficulty"
-            label="Dificultad"
-            value={difficulty}
-            onChange={handleChange}
-            options={[
-              { value: "0", label: "Elige una dificultad:" },
-              { value: "1", label: "1" },
-              { value: "2", label: "2" },
-              { value: "3", label: "3" },
-              { value: "4", label: "4" },
-              { value: "5", label: "5" },
-            ]}
-            error={errors.difficulty}
-          />
-
-          <InputWrapper>
-            <Label htmlFor="duration">Duración (en horas):</Label>
-            <Input
-              type="text"
-              id="duration"
-              name="duration"
-              placeholder="Escribe la duración en horas"
-              value={duration}
-              onChange={(e) => setDuration(e.target.value)}
-            />
-            {errors.duration && <ErrorMessage>{errors.duration}</ErrorMessage>}
-          </InputWrapper>
-
-          <SelectInputComponent
-            id="season"
-            name="season"
-            label="Temporada"
-            value={season}
-            onChange={handleChange}
-            options={[
-              { value: "", label: "Elige una temporada:" },
-              { value: "spring", label: "Primavera" },
-              { value: "summer", label: "Verano" },
-              { value: "autumn", label: "Otoño" },
-              { value: "winter", label: "Invierno" },
-            ]}
-            error={errors.season}
-          />
-          {/* TO DO: agregar validacion para que tenga que haber al menos un pais seleccionado */}
-          <InputWrapper>
-            <Label>Pais:</Label>
-            <Input
-              type="text"
-              id="country"
-              name="country"
-              placeholder="Escribe el nombre de un país"
-              value={inputValue}
-              onChange={handleCountryChange}
-            />
-          </InputWrapper>
-          <SelectedCountriesList>
-            {selectedCountries.map((country) => (
-              <CountrySelected key={country.code}>
-                {country.name} &#x2715;
-              </CountrySelected>
-            ))}
-          </SelectedCountriesList>
-          {inputValue.length > 0 && suggestions.length > 0 && (
-            <SuggestedCountriesList>
-              {suggestions.map((country) => (
-                <SuggestedCountriesItem
-                  key={country.code}
-                  onClick={() => handleCountrySelect(country)}
-                >
-                  {country.name}
-                </SuggestedCountriesItem>
-              ))}
-            </SuggestedCountriesList>
-          )}
-
-          <Button type="submit">Crear Actividad Turística</Button>
-        </FormContainer>
-      </Section>
-      <Footer />
-    </>
-  );
-};
-
-export default CreateActivity;
+export const ErrorMessage = styled.span`
+  color: rgb(255, 0, 46);
+  font-size: 13px;
+  text-align: right;
+`;
