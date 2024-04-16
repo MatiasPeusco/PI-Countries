@@ -14,8 +14,7 @@ import { CONTINENTS } from "../../constants";
 const FilterAndSorting = () => {
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
     const [showSortDropdown, setShowSortDropdown] = useState(false);
-    const [appliedFilter, setAppliedFilter] = useState(null);
-    const [appliedSorting, setAppliedSorting] = useState(null);
+    const [label, setLabel] = useState(null);
     const dispatch = useDispatch();
     const allCountries = useSelector((state) => state.allCountries);
 
@@ -27,54 +26,44 @@ const FilterAndSorting = () => {
         setShowSortDropdown(!showSortDropdown);
     };
 
-    const clearAppliedFilter = () => {
+    const clearAppliedLabel = () => {
         dispatch(resetCountriesList(allCountries));
-        setAppliedFilter(null);
-    };
-
-    const clearAppliedSorting = () => {
-        dispatch(resetCountriesList(allCountries));
-        setAppliedSorting(null);
+        setLabel(null);
     };
 
     const handleContinentFilter = (continent) => {
         dispatch(filterCountriesByContinent(continent));
         setShowFilterDropdown(false);
-        setAppliedFilter(`${continent}`);
+        setLabel(`${continent}`);
     };
 
     const handleSortAZ = () => {
         dispatch(resetCountriesList(allCountries));
         setShowSortDropdown(false);
-        setAppliedSorting("A - Z");
+        setLabel("A - Z");
     };
 
     const handleSortZA = () => {
         dispatch(sortCountriesZA());
         setShowSortDropdown(false);
-        setAppliedSorting("Z - A");
+        setLabel("Z - A");
     };
 
     const handleSortPopulationAsc = () => {
         dispatch(sortByPopulationAsc());
         setShowSortDropdown(false);
-        setAppliedSorting("Población Asc.");
+        setLabel("Población Asc.");
     };
 
     const handleSortPopulationDesc = () => {
         dispatch(sortByPopulationDesc());
         setShowSortDropdown(false);
-        setAppliedSorting("Población Desc.");
+        setLabel("Población Desc.");
     };
 
     return (
         <ButtonsContainer>
-            {appliedFilter && (
-                <Chip onClick={clearAppliedFilter}>{appliedFilter} &#x2715;</Chip>
-            )}
-            {appliedSorting && (
-                <Chip onClick={clearAppliedSorting}>{appliedSorting} &#x2715;</Chip>
-            )}
+            {label && <Chip onClick={clearAppliedLabel}>{label} &#x2715;</Chip>}
             <Wrapper>
                 <Button type="button" onClick={() => toggleFilterDropdown()}>
                     Filtrar
