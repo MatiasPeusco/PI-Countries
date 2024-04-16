@@ -15,13 +15,14 @@ import {
     ErrorMessage,
 } from "./StyledCreateActivity";
 import SelectInputComponent from "./SelectInputComponent";
+import { useSelector } from "react-redux";
 
 const CreateActivity = () => {
     const [name, setName] = useState("");
     const [difficulty, setDifficulty] = useState("0");
     const [duration, setDuration] = useState("");
     const [season, setSeason] = useState("");
-    const [countries, setCountries] = useState([]);
+    const [selectedCountries, setSelectedCountries] = useState([]);
     const [errors, setErrors] = useState({
         name: "",
         difficulty: "",
@@ -29,6 +30,10 @@ const CreateActivity = () => {
         season: "",
         countries: "",
     });
+
+    const [inputValue, setInputValue] = useState("");
+    const [suggestions, setSuggestions] = useState([]);
+    const countries = useSelector((state) => state.allCountries);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,6 +44,22 @@ const CreateActivity = () => {
         } else if (name === "season") {
             setSeason(value);
         }
+    };
+
+    const handleCountryChange = (e) => {
+        setInputValue(e.target.value);
+
+        const suggestions = countries.filter(
+            (country) =>
+                country.name.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+        );
+        setSuggestions(suggestions);
+    };
+
+    const handleCountrySelect = (selectedCountry) => {
+        setSelectedCountries([...selectedCountries, selectedCountry]);
+        setInputValue("");
+        setSuggestions([]);
     };
 
     const validateForm = () => {
@@ -158,7 +179,34 @@ const CreateActivity = () => {
                         error={errors.season}
                     />
 
-                    <h4>Aqui va el input / select para seleccionar Paises</h4>
+                    <InputWrapper>
+                        <Label>Pais:</Label>
+                        <ul>
+                            {selectedCountries.map((country) => (
+                                <li key={country.code}>{country.name}</li>
+                            ))}
+                        </ul>
+                        <Input
+                            type="text"
+                            id="country"
+                            name="country"
+                            placeholder="Escribe el nombre de un país"
+                            value={inputValue}
+                            onChange={handleCountryChange}
+                        />
+                    </InputWrapper>
+                    {suggestions.length > 0 && (
+                        <ul>
+                            {suggestions.map((country) => (
+                                <li
+                                    key={country.code}
+                                    onClick={() => handleCountrySelect(country)}
+                                >
+                                    {country.name}
+                                </li>
+                            ))}
+                        </ul>
+                    )}
 
                     <Button type="submit">Crear Actividad Turística</Button>
                 </FormContainer>
