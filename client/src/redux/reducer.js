@@ -9,6 +9,7 @@ import {
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
     GET_ACTIVITIES,
+    FILTER_COUNTRIES_BY_ACTIVITY,
 } from "../constants";
 
 const initialState = {
@@ -84,6 +85,11 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 activities: action.payload,
+            };
+        case FILTER_COUNTRIES_BY_ACTIVITY:
+            return {
+                ...state,
+                countries: action.payload,
             };
         default:
             return state;

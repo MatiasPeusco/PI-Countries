@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    filterCountriesByActivity,
     filterCountriesByContinent,
     resetCountriesList,
     sortByPopulationAsc,
@@ -41,6 +42,12 @@ const FilterAndSorting = () => {
         dispatch(filterCountriesByContinent(continent));
         setShowFilterDropdown(false);
         setLabel(`${continent}`);
+    };
+
+    const handleActivityFilter = (activity) => {
+        dispatch(filterCountriesByActivity(activity));
+        setShowFilterDropdown(false);
+        setLabel(`${activity}`);
     };
 
     const handleSortAZ = () => {
@@ -95,9 +102,7 @@ const FilterAndSorting = () => {
                                 activities.map((activity) => (
                                     <DropdownItem
                                         key={activity.id}
-                                        onClick={() =>
-                                            console.log("Filtrar por tipo de actividad turística")
-                                        }
+                                        onClick={() => handleActivityFilter(activity.name)}
                                     >
                                         {activity.name}
                                     </DropdownItem>

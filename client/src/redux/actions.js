@@ -10,6 +10,7 @@ import {
     CREATE_ACTIVITY_SUCCESS,
     CREATE_ACTIVITY_FAILURE,
     GET_ACTIVITIES,
+    FILTER_COUNTRIES_BY_ACTIVITY,
 } from "../constants";
 
 export const getCountries = () => {
@@ -110,6 +111,18 @@ export const getActivities = () => {
         const response = await axios.get("http://localhost:3001/activities");
         dispatch({
             type: GET_ACTIVITIES,
+            payload: response.data,
+        });
+    };
+};
+
+export const filterCountriesByActivity = (activity) => {
+    return async function (dispatch) {
+        const response = await axios.get(
+            `http://localhost:3001/countries?activity=${activity}`
+        );
+        dispatch({
+            type: FILTER_COUNTRIES_BY_ACTIVITY,
             payload: response.data,
         });
     };
