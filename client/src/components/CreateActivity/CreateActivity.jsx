@@ -72,6 +72,12 @@ const CreateActivity = () => {
         setSuggestions([]);
     };
 
+    const handleCountryRemove = (countryIndex) => {
+        const newSelectedCountries = [...selectedCountries];
+        newSelectedCountries.splice(countryIndex, 1);
+        setSelectedCountries(newSelectedCountries);
+    };
+
     const validateForm = () => {
         let isValid = true;
         const newErrors = { ...errors };
@@ -201,8 +207,11 @@ const CreateActivity = () => {
                         />
                     </InputWrapper>
                     <SelectedCountriesList>
-                        {selectedCountries.map((country) => (
-                            <CountrySelected key={country.code}>
+                        {selectedCountries.map((country, index) => (
+                            <CountrySelected
+                                key={country.code}
+                                onClick={() => handleCountryRemove(index)}
+                            >
                                 {country.name} &#x2715;
                             </CountrySelected>
                         ))}
