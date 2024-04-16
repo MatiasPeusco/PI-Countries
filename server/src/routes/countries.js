@@ -7,7 +7,7 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
     try {
-        const { name, continent, orderBy, sortBy } = req.query; // Obtener los valores de los parámetros de consulta
+        const { name, continent, orderBy, sortBy, activity } = req.query; // Obtener los valores de los parámetros de consulta
 
         let filter = {}; // Objeto para almacenar los filtros de búsqueda dinámicos
         let order = [['name', 'ASC']]; // Orden predeterminado: alfabético ascendente
@@ -24,6 +24,14 @@ router.get('/', async (req, res, next) => {
             filter.continent = continent;
         }
 
+        // Agregar filtro por actividad si se proporciona el parámetro 'activity'
+        if (activity) {
+            // Buscar países que tengan al menos una actividad asociada que coincida con el nombre de la actividad proporcionada
+            filter['$Activities.name$'] = {
+                [Op.iLike]: `%${activity}%`
+            };
+        }
+
         // Verificar si se proporciona el parámetro 'orderBy' y establecer el orden correspondiente
         if (orderBy && orderBy.toLowerCase() === 'desc') {
             order[0][1] = 'DESC'; // Cambiar el orden a descendente si se solicita
@@ -37,7 +45,11 @@ router.get('/', async (req, res, next) => {
         // Realizar la búsqueda en la base de datos con los filtros aplicados y el orden especificado
         const countries = await Country.findAll({
             where: filter, // Aplicar los filtros dinámicos
-            order: order // Aplicar el orden especificado
+            order: order, // Aplicar el orden especificado
+            include: [{
+                model: Activity,
+                attributes: ['name'] // Obtener solo el nombre de la actividad asociada
+            }]
         });
 
         // Verificar si se encontraron países
@@ -56,7 +68,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
     try {
         const id = req.params.id.toString(); // Obtiene el ID de la URL
-        const country = await Country.findByPk(id);
+        const country = await Country.findByPk(id, { include: Activity });
         if (!country) {
             return res.status(404).json({ message: 'País no encontrado' });
         }
