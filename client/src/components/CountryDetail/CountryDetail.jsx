@@ -75,6 +75,17 @@ const CountryDetail = () => {
                     <Image src={countryData?.flagImage} />
                 </ImageContainer>
             </Section>
+            {countryData?.Activities && (
+                <Section>
+                    <DetailsWrapper style={{ margin: "0 auto" }}>
+                        <ul>
+                            {countryData.Activities.map((activity, index) => (
+                                <li key={index}>{activity}</li>
+                            ))}
+                        </ul>
+                    </DetailsWrapper>
+                </Section>
+            )}
             <Footer />
         </>
     );
