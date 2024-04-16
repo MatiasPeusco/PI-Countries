@@ -9,11 +9,11 @@ const CountriesList = ({ countries }) => {
                 {countries &&
                     countries.map((country) => (
                         <CountryCard
-                            key={country.name.common}
-                            id={country.cca3}
-                            image={country.flags.png}
-                            name={country.name.common}
-                            continent={country.continents[0]}
+                            key={country.name}
+                            id={country.id}
+                            image={country.flagImage}
+                            name={country.name}
+                            continent={country.continent}
                         />
                     ))}
             </List>

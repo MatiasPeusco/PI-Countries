@@ -8,7 +8,7 @@ import {
 
 export const getCountries = () => {
     return async function (dispatch) {
-        const response = await axios.get("http://localhost:5000/countries");
+        const response = await axios.get("http://localhost:3001/countries");
         dispatch({
             type: GET_COUNTRIES,
             payload: response.data,
