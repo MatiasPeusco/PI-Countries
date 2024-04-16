@@ -92,7 +92,7 @@ const CreateActivity = () => {
         let isValid = true;
         const newErrors = { ...errors };
 
-        if (!name.match(/^[a-zA-Z\s]+$/)) {
+        if (!name.match(/^[a-zA-Z\sñÑ]+$/)) {
             newErrors.name = "*El nombre solo puede contener letras y espacios";
             isValid = false;
         } else {
@@ -238,7 +238,7 @@ const CreateActivity = () => {
                     <SelectedCountriesList>
                         {selectedCountries.map((country, index) => (
                             <CountrySelected
-                                key={country.code}
+                                key={country.id}
                                 onClick={() => handleCountryRemove(index)}
                             >
                                 {country.name} &#x2715;
