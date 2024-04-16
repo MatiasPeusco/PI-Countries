@@ -134,19 +134,17 @@ const CreateActivity = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
+            const countriesIds = selectedCountries.map((country) => country.id);
             const newActivity = {
-                name,
-                difficulty,
-                duration,
-                season,
-                countries: selectedCountries.map((country) => ({ name: country.name })),
+                name: name,
+                difficulty: difficulty,
+                duration: duration,
+                season: season,
+                countries: countriesIds,
             };
 
             dispatch(createActivity(newActivity));
-
             clearAllInputs();
-
-            console.log("Formulario válido. Enviando datos...");
         } else {
             console.log("Formulario inválido. Por favor, revisa los campos.");
         }
@@ -215,10 +213,10 @@ const CreateActivity = () => {
                         onChange={handleChange}
                         options={[
                             { value: "", label: "Elige una temporada:" },
-                            { value: "spring", label: "Primavera" },
-                            { value: "summer", label: "Verano" },
-                            { value: "autumn", label: "Otoño" },
-                            { value: "winter", label: "Invierno" },
+                            { value: "Spring", label: "Primavera" },
+                            { value: "Summer", label: "Verano" },
+                            { value: "Autumn", label: "Otoño" },
+                            { value: "Winter", label: "Invierno" },
                         ]}
                         error={errors.season}
                     />
