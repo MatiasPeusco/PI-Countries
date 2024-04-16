@@ -10,6 +10,8 @@ import {
     DetailsWrapper,
     ImageContainer,
     Image,
+    ActivitiesContainer,
+    ActivitiesWrapper,
 } from "./StyledCountryDetail";
 import StyledLine from "../StyledLine";
 import Footer from "../Footer/Footer";
@@ -76,14 +78,21 @@ const CountryDetail = () => {
                 </ImageContainer>
             </Section>
             {countryData?.Activities.length > 0 && (
-                <Section>
-                    <DetailsWrapper style={{ margin: "0 auto" }}>
-                        <ul>
-                            {countryData.Activities.map((activity, index) => (
-                                <li key={index}>{activity}</li>
-                            ))}
-                        </ul>
-                    </DetailsWrapper>
+                <Section style={{ flexDirection: "column" }}>
+                    <h3>Actividades disponibles:</h3>
+                    <ActivitiesContainer>
+                        {countryData.Activities.map((activity) => (
+                            <ActivitiesWrapper key={activity.id}>
+                                <h4>{activity.name}</h4>
+                                <DetailInfo
+                                    itemName={"Dificultad:"}
+                                    detail={activity.difficulty}
+                                />
+                                <DetailInfo itemName={"Duración:"} detail={activity.duration} />
+                                <DetailInfo itemName={"Temporada:"} detail={activity.season} />
+                            </ActivitiesWrapper>
+                        ))}
+                    </ActivitiesContainer>
                 </Section>
             )}
             <Footer />

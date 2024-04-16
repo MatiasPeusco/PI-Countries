@@ -64,7 +64,7 @@ export const Details = styled.div`
 
 export const Item = styled.p`
   margin: 0 10px 0;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 600;
 `;
 
@@ -88,4 +88,20 @@ export const ImageContainer = styled.div`
 
 export const Image = styled.img`
   object-fit: contain;
+`;
+
+export const ActivitiesContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+export const ActivitiesWrapper = styled.div`
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  margin-right: 10px;
+  border: 0.0625rem solid #eaecf0;
+  border-radius: 1.5rem;
 `;
