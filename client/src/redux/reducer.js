@@ -13,7 +13,11 @@ import {
 const initialState = {
     countries: [],
     allCountries: [],
-    error: null,
+    error: {
+        errorMessage: null,
+        code: null,
+        status: null,
+    },
 };
 
 // Reducer principal que maneja las acciones y actualiza el estado en consecuencia
@@ -56,16 +60,23 @@ function rootReducer(state = initialState, action) {
                 countries: action.payload,
             };
         case CREATE_ACTIVITY_SUCCESS:
-            console.log(action.payload)
+            console.log(action.payload.statusText);
             return {
                 ...state,
-                error: action.payload,
+                error: {
+                    errorMessage: action.payload.statusText,
+                    status: action.payload.status,
+                },
             };
         case CREATE_ACTIVITY_FAILURE:
-            console.log(action.payload)
+            console.log(action.payload.errorMessage);
             return {
                 ...state,
-                error: action.payload,
+                error: {
+                    errorMessage: action.payload.errorMessage,
+                    code: action.payload.code,
+                    status: action.payload.response.status,
+                },
             };
         default:
             return state;
