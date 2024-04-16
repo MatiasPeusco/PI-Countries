@@ -4,7 +4,7 @@ import {
     SORT_COUNTRIES_Z_A,
     SORT_BY_POPULATION_ASC,
     SORT_BY_POPULATION_DESC,
-    FILTER_COUNTRIES,
+    FILTER_COUNTRIES_BY_CONTINENT,
     RESET_COUNTRIES_LIST,
 } from "../constants";
 
@@ -42,7 +42,7 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 countries: action.payload,
             };
-        case FILTER_COUNTRIES:
+        case FILTER_COUNTRIES_BY_CONTINENT:
             return {
                 ...state,
                 countries: action.payload,

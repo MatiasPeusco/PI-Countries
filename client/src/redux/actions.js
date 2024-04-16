@@ -5,7 +5,7 @@ import {
     SORT_COUNTRIES_Z_A,
     SORT_BY_POPULATION_ASC,
     SORT_BY_POPULATION_DESC,
-    FILTER_COUNTRIES,
+    FILTER_COUNTRIES_BY_CONTINENT,
     RESET_COUNTRIES_LIST,
 } from "../constants";
 
@@ -71,10 +71,17 @@ export const sortByPopulationDesc = () => {
     }
 };
 
-export const filterCountries = (filteredCountries) => ({
-    type: FILTER_COUNTRIES,
-    payload: filteredCountries,
-});
+export const filterCountriesByContinent = (continent) => {
+    return async function (dispatch) {
+        const response = await axios.get(
+            `http://localhost:3001/countries?continent=${continent}`
+        );
+        dispatch({
+            type: FILTER_COUNTRIES_BY_CONTINENT,
+            payload: response.data,
+        });
+    };
+};
 
 export const resetCountriesList = (countries) => ({
     type: RESET_COUNTRIES_LIST,

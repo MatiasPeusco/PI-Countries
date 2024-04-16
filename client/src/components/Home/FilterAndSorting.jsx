@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+    filterCountriesByContinent,
     resetCountriesList,
     sortByPopulationAsc,
     sortByPopulationDesc,
     sortCountriesZA,
 } from "../../redux/actions";
-import {
-    filterCountriesByContinent,
-} from "../../utils";
 import { Chip, ButtonsContainer, Button } from "./StyledHome";
 import { Wrapper, DropdownMenu, DropdownItem } from "./StyledFilterAndSorting";
 import { CONTINENTS } from "../../constants";
@@ -40,7 +38,7 @@ const FilterAndSorting = () => {
     };
 
     const handleContinentFilter = (continent) => {
-        filterCountriesByContinent(dispatch, allCountries, continent);
+        dispatch(filterCountriesByContinent(continent));
         setShowFilterDropdown(false);
         setAppliedFilter(`${continent}`);
     };
