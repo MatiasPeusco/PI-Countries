@@ -30,4 +30,4 @@ async function populateDatabase() {
     }
 }
 
-module.exports = { populateDatabase, isDatabasePopulated };
+module.exports = { populateDatabase };
