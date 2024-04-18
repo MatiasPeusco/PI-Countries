@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Footer from "../Footer/Footer";
 import GoBackComponent from "../GoBack/goback";
 import Navbar from "../Navbar/Navbar";
@@ -21,6 +21,7 @@ import {
 import SelectInputComponent from "./SelectInputComponent";
 import { useDispatch, useSelector } from "react-redux";
 import { createActivity } from "../../redux/actions";
+import { getCountries } from "../../redux/actions";
 
 const CreateActivity = () => {
     const [name, setName] = useState("");
@@ -40,6 +41,11 @@ const CreateActivity = () => {
     const [suggestions, setSuggestions] = useState([]);
     const countries = useSelector((state) => state.allCountries);
     const dispatch = useDispatch();
+
+
+    useEffect(() => {
+        dispatch(getCountries());
+    }, [dispatch]);
 
     const clearAllInputs = () => {
         setName("");
